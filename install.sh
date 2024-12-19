@@ -479,7 +479,7 @@ ingresar_key(){
   }
   IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" > /usr/bin/venip
   sleep 1s
-  function_verify
+  #function_verify
   updatedb &>/dev/null
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
     msg -bar2
@@ -490,6 +490,7 @@ ingresar_key(){
     stopping="Descargando Archivos"
     for arqx in $(cat $HOME/lista-arq); do
       msg -verm "${stopping}${pontos}"
+      echo ${IP}:81/${REQUEST}/${arqx}
       wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
         error_fun
       }
