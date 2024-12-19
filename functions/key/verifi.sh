@@ -1,6 +1,6 @@
 #!/bin/bash
 #beta test
-#by @lacasitaes
+#by @vps-freenet
 #codigo fuente separado
 
 SCPdir="/etc/vps-freenet"

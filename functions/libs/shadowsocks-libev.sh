@@ -1,11 +1,5 @@
-#!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-#
-# Auto install Shadowsocks Server (all version)
-#
-# Copyright (C) 2016-2019 Teddysun <i@teddysun.com>
-#
 # System Required:  CentOS 6+, Debian7+, Ubuntu12+
 #
 # Reference URL:
@@ -37,8 +31,8 @@ plain='\033[0m'
 cur_dir=$( pwd )
 software=(Shadowsocks-Python ShadowsocksR Shadowsocks-Go Shadowsocks-libev)
 
-libsodium_file="libsodium-1.0.17"
-libsodium_url="https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz"
+libsodium_file="libsodium-1.0.18"
+libsodium_url="https://github.com/lacasitamx/libsodium/raw/master/Libso/libsodium-1.0.18.tar.gz"
 
 mbedtls_file="mbedtls-2.16.0"
 mbedtls_url="https://tls.mbed.org/download/mbedtls-2.16.0-gpl.tgz"
@@ -47,15 +41,15 @@ shadowsocks_python_file="shadowsocks-master"
 shadowsocks_python_url="https://github.com/shadowsocks/shadowsocks/archive/master.zip"
 shadowsocks_python_init="/etc/init.d/shadowsocks-python"
 shadowsocks_python_config="/etc/shadowsocks-python/config.json"
-shadowsocks_python_centos="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks"
-shadowsocks_python_debian="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-debian"
+shadowsocks_python_centos="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks"
+shadowsocks_python_debian="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks-debian"
 
 shadowsocks_r_file="shadowsocksr-3.2.2"
 shadowsocks_r_url="https://github.com/shadowsocksrr/shadowsocksr/archive/3.2.2.tar.gz"
 shadowsocks_r_init="/etc/init.d/shadowsocks-r"
 shadowsocks_r_config="/etc/shadowsocks-r/config.json"
-shadowsocks_r_centos="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR"
-shadowsocks_r_debian="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR-debian"
+shadowsocks_r_centos="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocksR"
+shadowsocks_r_debian="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocksR-debian"
 
 shadowsocks_go_file_64="shadowsocks-server-linux64-1.2.2"
 shadowsocks_go_url_64="https://dl.lamp.sh/shadowsocks/shadowsocks-server-linux64-1.2.2.gz"
@@ -63,13 +57,13 @@ shadowsocks_go_file_32="shadowsocks-server-linux32-1.2.2"
 shadowsocks_go_url_32="https://dl.lamp.sh/shadowsocks/shadowsocks-server-linux32-1.2.2.gz"
 shadowsocks_go_init="/etc/init.d/shadowsocks-go"
 shadowsocks_go_config="/etc/shadowsocks-go/config.json"
-shadowsocks_go_centos="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go"
-shadowsocks_go_debian="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go-debian"
+shadowsocks_go_centos="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks-go"
+shadowsocks_go_debian="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks-go-debian"
 
 shadowsocks_libev_init="/etc/init.d/shadowsocks-libev"
 shadowsocks_libev_config="/etc/shadowsocks-libev/config.json"
-shadowsocks_libev_centos="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev"
-shadowsocks_libev_debian="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev-debian"
+shadowsocks_libev_centos="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks-libev"
+shadowsocks_libev_debian="https://raw.githubusercontent.com/lacasitamx/shadowsocks_install/master/shadowsocks-libev-debian"
 
 # Stream Ciphers
 common_ciphers=(
@@ -598,12 +592,12 @@ install_select(){
     clear
     while true
     do
-	selected=4
+        selected=4
     case "${selected}" in
         1|2|3|4)
         msg -bar
         echo "Este Proceso instalara: ${software[${selected}-1]}"
-		echo "   ##Este proceso puede demorar unos minutos##"
+                echo "   ##Este proceso puede demorar unos minutos##"
         msg -bar
         break
         ;;
@@ -616,8 +610,8 @@ install_select(){
 
 install_prepare_password(){
     echo "Por favor, introduzca la contraseña para ${software[${selected}-1]}"
-    read -p "(Default Contraseña: pro.sshyproxy.xyz):" shadowsockspwd
-    [ -z "${shadowsockspwd}" ] && shadowsockspwd="pro.sshyproxy.xyz"
+    read -p "(Default Contraseña: vps-freenet):" shadowsockspwd
+    [ -z "${shadowsockspwd}" ] && shadowsockspwd="vps-freenet"
     msg -bar
     echo "Contraseña = ${shadowsockspwd}"
     msg -bar
@@ -653,7 +647,7 @@ install_prepare_cipher(){
             hint="${common_ciphers[$i-1]}"
             echo -e "${green}${i}${plain}) ${hint}"
         done
-		msg -bar
+                msg -bar
         read -p "¿Qué cifrado elegirías?(Default: ${common_ciphers[0]}):" pick
         [ -z "$pick" ] && pick=1
         expr ${pick} + 1 &>/dev/null
@@ -671,7 +665,7 @@ install_prepare_cipher(){
             hint="${r_ciphers[$i-1]}"
             echo -e "${green}${i}${plain}) ${hint}"
         done
-		msg -bar
+                msg -bar
         read -p "¿Qué cifrado elegirías?(Default: ${r_ciphers[1]}):" pick
         [ -z "$pick" ] && pick=2
         expr ${pick} + 1 &>/dev/null
@@ -689,7 +683,7 @@ install_prepare_cipher(){
             hint="${go_ciphers[$i-1]}"
             echo -e "${green}${i}${plain}) ${hint}"
         done
-		msg -bar
+                msg -bar
         read -p "¿Qué cifrado elegirías?(Default: ${go_ciphers[0]}):" pick
         [ -z "$pick" ] && pick=1
         expr ${pick} + 1 &>/dev/null
@@ -742,12 +736,12 @@ install_prepare_obfs(){
     while true
     do
     echo -e "Por favor, seleccione obfs para ${software[${selected}-1]}:"
-	msg -bar
+        msg -bar
     for ((i=1;i<=${#obfs[@]};i++ )); do
         hint="${obfs[$i-1]}"
         echo -e "${green}${i}${plain}) ${hint}"
     done
-	msg -bar
+        msg -bar
     read -p "Qué objs elegirías(Default: ${obfs[0]}):" r_obfs
     [ -z "$r_obfs" ] && r_obfs=1
     expr ${r_obfs} + 1 &>/dev/null
@@ -791,12 +785,12 @@ install_prepare_libev_obfs(){
             while true
             do
             echo -e "Por favor, seleccione obfs para simple-obfs:"
-			msg -bar
+                        msg -bar
             for ((i=1;i<=${#obfs_libev[@]};i++ )); do
                 hint="${obfs_libev[$i-1]}"
                 echo -e "${green}${i}${plain}) ${hint}"
             done
-			msg -bar
+                        msg -bar
             read -p "Qué objs elegirías(Default: ${obfs_libev[0]}):" r_libev_obfs
             [ -z "$r_libev_obfs" ] && r_libev_obfs=1
             expr ${r_libev_obfs} + 1 &>/dev/null
@@ -844,8 +838,8 @@ install_prepare(){
 
 install_libsodium(){
     if [ ! -f /usr/lib/libsodium.a ]; then
-        cd ${cur_dir}
-        download "${libsodium_file}.tar.gz" "${libsodium_url}"
+        cd /tmp/
+        wget https://raw.githubusercontent.com/lacasitamx/libsodium/master/Libso/libsodium-1.0.18.tar.gz
         tar zxf ${libsodium_file}.tar.gz
         cd ${libsodium_file}
         ./configure --prefix=/usr && make && make install
@@ -861,9 +855,10 @@ install_libsodium(){
 
 install_mbedtls(){
     if [ ! -f /usr/lib/libmbedtls.a ]; then
-        cd ${cur_dir}
+        cd /tmp/
         download "${mbedtls_file}-gpl.tgz" "${mbedtls_url}"
-        tar xf ${mbedtls_file}-gpl.tgz
+        wget https://raw.githubusercontent.com/lacasitamx/ZETA/master/sha/mbedtls-2.16.0.tgz
+        tar xf ${mbedtls_file}.tgz
         cd ${mbedtls_file}
         make SHARED=1 CFLAGS=-fPIC
         make DESTDIR=/usr install
@@ -901,7 +896,7 @@ install_shadowsocks_python(){
     else
         echo
         echo -e "[${red}Error${plain}] ${software[0]} install failed."
-        echo "Please visit: https://teddysun.com/486.html and contact."
+   #     echo "Please visit: https://teddysun.com/486.html and contact."
         install_cleanup
         exit 1
     fi
@@ -923,7 +918,7 @@ install_shadowsocks_r(){
     else
         echo
         echo -e "[${red}Error${plain}] ${software[1]} install failed."
-        echo "Please visit; https://teddysun.com/486.html and contact."
+    #    echo "Please visit; https://teddysun.com/486.html and contact."
         install_cleanup
         exit 1
     fi
@@ -963,7 +958,7 @@ install_shadowsocks_go(){
     else
         echo
         echo -e "[${red}Error${plain}] ${software[2]} install failed."
-        echo "Please visit: https://teddysun.com/486.html and contact."
+       # echo "Please visit: https://teddysun.com/486.html and contact."
         install_cleanup
         exit 1
     fi
@@ -986,7 +981,7 @@ install_shadowsocks_libev(){
     else
         echo
         echo -e "[${red}Error${plain}] ${software[3]} install failed."
-        echo "Please visit: https://teddysun.com/486.html and contact."
+     #   echo "Please visit: https://teddysun.com/486.html and contact."
         install_cleanup
         exit 1
     fi
@@ -1015,7 +1010,7 @@ install_shadowsocks_libev_obfs(){
         make install
         if [ ! "$(command -v obfs-server)" ]; then
             echo -e "[${red}Error${plain}] simple-obfs for ${software[${selected}-1]} install failed."
-            echo "Please visit: https://teddysun.com/486.html and contact."
+        #    echo "Please visit: https://teddysun.com/486.html and contact."
             install_cleanup
             exit 1
         fi
@@ -1071,6 +1066,12 @@ install_completed_libev(){
     echo -e "Tu obfs             : ${red} ${shadowsocklibev_obfs} ${plain}"
     fi
     echo -e "Tu Encryption Method: ${red} ${shadowsockscipher} ${plain}"
+    #guardando confi
+    echo "Server IP        : $(get_ip)" >/etc/shadowsocks-libev/confis
+    echo "Server Port      : ${shadowsocksport}" >>/etc/shadowsocks-libev/confis
+    echo "Password         : ${shadowsockspwd}" >>/etc/shadowsocks-libev/confis
+    echo "Obfs             : ${shadowsocklibev_obfs}" >>/etc/shadowsocks-libev/confis
+    echo "Tu Encryption Method: ${shadowsockscipher}" >>/etc/shadowsocks-libev/confis
 }
 
 qr_generate_python(){
@@ -1120,6 +1121,7 @@ qr_generate_libev(){
         echo
         echo "Tu QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)"
         echo -e "${green} ${qr_code} ${plain}"
+        echo "${qr_code}" >>/etc/shadowsocks-libev/confis
         echo -n "${qr_code}" | qrencode -s8 -o ${cur_dir}/shadowsocks_libev_qr.png
         echo "Tu QR Code has been saved as a PNG file path:"
         echo -e "${green} ${cur_dir}/shadowsocks_libev_qr.png ${plain}"
@@ -1161,8 +1163,8 @@ install_main(){
 install_cleanup(){
     cd ${cur_dir}
     rm -rf simple-obfs
-    rm -rf ${libsodium_file} ${libsodium_file}.tar.gz
-    rm -rf ${mbedtls_file} ${mbedtls_file}-gpl.tgz
+    rm -rf /tmp/${libsodium_file} ${libsodium_file}.tar.gz
+    rm -rf /tmp/${mbedtls_file} ${mbedtls_file}.tgz
     rm -rf ${shadowsocks_python_file} ${shadowsocks_python_file}.zip
     rm -rf ${shadowsocks_r_file} ${shadowsocks_r_file}.tar.gz
     rm -rf ${shadowsocks_go_file_64}.gz ${shadowsocks_go_file_32}.gz
@@ -1313,15 +1315,24 @@ uninstall_shadowsocks_libev(){
 }
 
 uninstall_shadowsocks(){
+if [ -f ${shadowsocks_libev_init} ]; then
+            uninstall_shadowsocks_libev
+        else
+            echo -e "[${red}Error${plain}] ${software[${un_select}-1]} not installed, please check it and try again."
+            echo
+            exit 1
+        fi
+}
+unsha(){
     while true
     do
     echo  "¿Qué servidor de Shadowsocks quieres desinstalar?"
-	msg -bar
+        msg -bar
     for ((i=1;i<=${#software[@]};i++ )); do
         hint="${software[$i-1]}"
         echo -e "${green}${i}${plain}) ${hint}"
     done
-	msg -bar
+        msg -bar
     read -p "Por favor, introduzca un número[1-4]:" un_select
     case "${un_select}" in
         1|2|3|4)

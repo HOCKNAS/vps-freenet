@@ -1,7 +1,7 @@
 clear
 
 CTRL_C(){
-  rm -rf LACASITA.sh
+  rm -rf install.sh
   exit
 }
 
@@ -263,7 +263,7 @@ function_verify () {
   [[ $(echo $permited|grep "${IP}") = "" ]] && {
     clear
     msg -tit
-    echo -e "\n\n\n\033[1;91m————————————————————————————————————————————————————\n      ¡ESTA KEY NO CONCUERDA CON EL INSTALADOR! \n      BOT: @CONECTEDMX_BOT \n————————————————————————————————————————————————————\n\n\n"
+    echo -e "\n\n\n\033[1;91m————————————————————————————————————————————————————\n      ¡ESTA KEY NO CONCUERDA CON EL INSTALADOR! \n      BOT: @vps_freenet_BOT \n————————————————————————————————————————————————————\n\n\n"
     [[ -d /etc/vps-freenet ]] && rm -rf /etc/vps-freenet
     exit 1
   } || {
@@ -342,7 +342,7 @@ install_fim () {
   echo -e "  \033[1;41m               sudo menu             \033[0;37m" && msg -bar2
 
   rm -rf /usr/bin/pytransform &> /dev/null
-  rm -rf LACASITA.sh
+  rm -rf install.sh
   rm -rf lista-arq
 
   service ssh restart &>/dev/null
@@ -463,7 +463,7 @@ ingresar_key(){
   /bin/cp /etc/skel/.bashrc ~/
   service apache2 restart >/dev/null 2>&1
   [[ -d /etc/keyno ]] && rm -rf /etc/keyno &>/dev/null
-  echo "by @lacasitaes 2024" >/etc/keyno
+  echo "by @vps-freenet 2024" >/etc/keyno
   unset Key
   while [[ ! $Key ]]; do
     msg -bar2 && msg -ne "\033[1;93m          >>> INGRESE SU KEY ABAJO <<<\n   \033[1;37m" && read Key
@@ -483,7 +483,7 @@ ingresar_key(){
   updatedb &>/dev/null
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
     msg -bar2
-    msg -verd "    Archivos Copiados: \e[97m[\e[91mby @conectedes_bot\e[97m]"
+    msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
     REQUEST=$(ofus "$Key"|cut -d'/' -f2)
     [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
     pontos="¡"
@@ -519,7 +519,7 @@ ingresar_key(){
  ◄══════◄••◩••►══════►
  KEY: $Key 👈 Usada
  ◄══════◄••◩••►══════►
- By @Lacasitaes
+ By @vps-freenet
  ◄══════◄••◩••►══════►
  Porque de tal manera amó Dios al mundo,
 que ha dado a su Hijo unigénito,
@@ -556,7 +556,7 @@ de mi Padre en el cielo.(Mateo 10:32-33)
  ◄══════◄••◩••►══════►
  KEY: $Key 👈 Usada
  ◄══════◄••◩••►══════►
- By @Lacasitaes
+ By @vps-freenet
  ◄══════◄••◩••►══════►
  "
         curl -s --max-time 10 -d "chat_id=${user}&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null

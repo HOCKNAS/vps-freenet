@@ -196,6 +196,8 @@ main_fun () {
 msg -bar2
 msg -tit ""
 msg -ama "                EDITAR PUERTOS ACTIVOS "
+msg -bar
+vpsfreenet
 msg -bar2
 unset newports
 i=0

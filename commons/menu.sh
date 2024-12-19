@@ -132,7 +132,7 @@ function_verify() {
 atualiza_fun() {
    
    clear && clear 
-   echo -e "e\[1;97m       SEGURO DE ACTULIZAR VPS-MX"
+   echo -e "e\[1;97m       SEGURO DE ACTULIZAR VPS-FREENET"
    read -t 60 -n 1 -rsp $'\033[1;39m       << Presiona enter para Continuar >>\n'
    rm -rf install.sh
    apt update
@@ -421,7 +421,7 @@ remove_script() {
    msg -tit
    msg -ama "          ¿ DESEA DESINSTALAR SCRIPT ?"
    msg -bar
-   echo -e " Esto borrara todos los archivos del scrip VPS_MX"
+   echo -e " Esto borrara todos los archivos del scrip VPS-FREENET"
    msg -bar
    while [[ ${yesno} != @(s|S|y|Y|n|N) ]]; do
       read -p " [S/N]: " yesno
@@ -562,7 +562,7 @@ ferramentas_fun() {
    echo -e "\033[1;93m-----------------------SEGURIDAD---------------------"
    #PROTECION
    let Numb++
-   echo -ne "$(msg -verd "[$Numb]") $(msg -verm2 ">") " && msg -azu "FIREWALL PARA VPS VPS•MX            $ofc"
+   echo -ne "$(msg -verd "[$Numb]") $(msg -verm2 ">") " && msg -azu "FIREWALL PARA VPS VPS            $ofc"
    script[$Numb]="blockBT.sh"
    let Numb++
    echo -ne "$(msg -verd "[$Numb]") $(msg -verm2 ">") " && msg -azu "FAIL2BAN PROTECION                  $ofc"
