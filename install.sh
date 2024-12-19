@@ -70,11 +70,11 @@ fun_ip (){
 os_system(){
   #code by rufu99
   SYSTEM_OS=$(cat -n /etc/issue |grep 1 |cut -d ' ' -f6,7,8 |sed 's/1//'|sed 's/      //')
-  DISTRO_OS=$(echo "$SYSTEM_RELEASE"|awk '{print $1}')
+  DISTRO_OS=$(echo "$SYSTEM_OS"|awk '{print $1}')
 
-  case $DISTRO_OS_OS in
-    Debian)RELEASE_OS=$(echo $SYSTEM_RELEASE|awk '{print $3}'|cut -d '.' -f1);;
-    Ubuntu)RELEASE_OS=$(echo $SYSTEM_RELEASE|awk '{print $2}'|cut -d '.' -f1,2);;
+  case $DISTRO_OS in
+    Debian)RELEASE_OS=$(echo $SYSTEM_OS|awk '{print $3}'|cut -d '.' -f1);;
+    Ubuntu)RELEASE_OS=$(echo $SYSTEM_OS|awk '{print $2}'|cut -d '.' -f1,2);;
   esac
 
   link="https://raw.githubusercontent.com/HOCKNAS/vps-freenet/master/repositories_list/${RELEASE_OS}.list"
@@ -479,7 +479,7 @@ ingresar_key(){
   }
   IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" > /usr/bin/venip
   sleep 1s
-  function_verify
+  #function_verify
   updatedb &>/dev/null
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
     msg -bar2
