@@ -481,6 +481,7 @@ ingresar_key(){
   sleep 1s
   #function_verify
   updatedb &>/dev/null
+  echo -e "wireguard.sh\nadminkey\nname\nID\nslowdns.sh\nADMbot.sh\nC-SSR.sh\nPDirect.py\nPGet.py\nPOpen.py\nPPriv.py\nPPub.py\nfai2ban.sh\nmenu\nmessage.txt\nopenvpn.sh\nports.sh\nspeed.py\nsquid.sh\nsquidpass.sh\npython.py" > "lista-arq"
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
     msg -bar2
     msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
