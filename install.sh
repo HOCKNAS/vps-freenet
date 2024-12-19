@@ -477,8 +477,7 @@ ingresar_key(){
   #   echo -e "\033[1;91m ¡Ofus Incorrecto!"
   #   #invalid_key
   # }
-  sleep 5
-  echo -e "\033[1;32m Ofus Correcto"
+  sleep 5 && echo -e "\033[1;32m Ofus Correcto"
   IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" > /usr/bin/venip
   sleep 1s
   #function_verify
@@ -494,6 +493,7 @@ ingresar_key(){
     for arqx in $(cat $HOME/lista-arq); do
       msg -verm "${stopping}${pontos}"
       echo ${IP}:81/${REQUEST}/${arqx}
+      sleep $(shuf -i 1-5 -n 1)
       # wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
       #   error_fun
       # }
