@@ -26,6 +26,7 @@ time_reboot(){
 
 v1=$(curl -sSL "https://raw.githubusercontent.com/HOCKNAS/vps-freenet/master/release") # 11X
 echo "$v1" > /etc/script_version
+echo "$PWD" > /etc/download
 
 msg (){
   v22=$(cat /etc/script_version)
@@ -492,7 +493,7 @@ ingresar_key(){
     stopping="Descargando Archivos"
     
     TARGET_DIR="/etc/vps-freenet"
-    SOURCE_DIR="./raw_install"
+    SOURCE_DIR="$(cat /etc/download)/raw_install"
     if [ -d "$TARGET_DIR" ]; then
         rm -rf "$TARGET_DIR"
     fi
