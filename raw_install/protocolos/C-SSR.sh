@@ -2077,3 +2077,4 @@ case "$num" in
         msg -bar
         ;;
 esac
+fi
