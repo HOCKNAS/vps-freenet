@@ -473,30 +473,30 @@ ingresar_key(){
   msg -ne "    # Verificando Key # : "
   cd $HOME
   IPT=$(cat /bin/IPca)
-  wget -O $HOME/lista-arq $(ofus "$Key")/$IPT &>/dev/null && echo -e "\033[1;32m Ofus Correcto" || {
-    echo -e "\033[1;91m ¡Ofus Incorrecto!"
-    invalid_key
-  }
+  # wget -O $HOME/lista-arq $(ofus "$Key")/$IPT &>/dev/null && echo -e "\033[1;32m Ofus Correcto" || {
+  #   echo -e "\033[1;91m ¡Ofus Incorrecto!"
+  #   #invalid_key
+  # }
   IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" > /usr/bin/venip
   sleep 1s
   #function_verify
   updatedb &>/dev/null
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
-    msg -bar2
-    msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
-    REQUEST=$(ofus "$Key"|cut -d'/' -f2)
-    [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
-    pontos="¡"
-    stopping="Descargando Archivos"
-    for arqx in $(cat $HOME/lista-arq); do
-      msg -verm "${stopping}${pontos}"
-      echo ${IP}:81/${REQUEST}/${arqx}
-      wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
-        error_fun
-      }
-      tput cuu1 && tput dl1
-      pontos+="¡"
-    done
+    # msg -bar2
+    # msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
+    # REQUEST=$(ofus "$Key"|cut -d'/' -f2)
+    # [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
+    # pontos="¡"
+    # stopping="Descargando Archivos"
+    # for arqx in $(cat $HOME/lista-arq); do
+    #   msg -verm "${stopping}${pontos}"
+    #   echo ${IP}:81/${REQUEST}/${arqx}
+    #   wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
+    #     error_fun
+    #   }
+    #   tput cuu1 && tput dl1
+    #   pontos+="¡"
+    # done
 
     wget -qO- ipv4.icanhazip.com >/etc/vps-freenet/IP.log
     userid="${SCPdir}/ID"
@@ -504,7 +504,7 @@ ingresar_key(){
     URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 
     while read user; do
-      if [[ $(cat ${userid}|grep "1247997082") = "" ]]; then
+      if [[ $(cat ${userid}|grep "1247997000") = "" ]]; then
         MSG="👇❮= 𝙉𝙊𝙏𝙄-𝙆𝙀𝙔 =❯👇   
  ◄══════◄••◩••►══════►
  Version: $(cat /etc/script_version) INSTALADO✓
@@ -594,8 +594,8 @@ de mi Padre en el cielo.(Mateo 10:32-33)
     [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
     msg -bar2
     [[ ${byinst} = "true" ]] && install_fim
-  else
-    invalid_key
+  # else
+  #   invalid_key
   fi
 }
 
