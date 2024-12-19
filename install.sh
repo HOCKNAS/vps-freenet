@@ -482,21 +482,21 @@ ingresar_key(){
   #function_verify
   updatedb &>/dev/null
   if [[ -e $HOME/lista-arq ]] && [[ ! $(cat /etc/keyno|grep "¡KEY invalido!") ]]; then
-    # msg -bar2
-    # msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
-    # REQUEST=$(ofus "$Key"|cut -d'/' -f2)
-    # [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
-    # pontos="¡"
-    # stopping="Descargando Archivos"
-    # for arqx in $(cat $HOME/lista-arq); do
-    #   msg -verm "${stopping}${pontos}"
-    #   echo ${IP}:81/${REQUEST}/${arqx}
-    #   wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
-    #     error_fun
-    #   }
-    #   tput cuu1 && tput dl1
-    #   pontos+="¡"
-    # done
+    msg -bar2
+    msg -verd "    Archivos Copiados: \e[97m[\e[91mby @vps_freenet_bot\e[97m]"
+    REQUEST=$(ofus "$Key"|cut -d'/' -f2)
+    [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
+    pontos="¡"
+    stopping="Descargando Archivos"
+    for arqx in $(cat $HOME/lista-arq); do
+      msg -verm "${stopping}${pontos}"
+      echo ${IP}:81/${REQUEST}/${arqx}
+      # wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
+      #   error_fun
+      # }
+      tput cuu1 && tput dl1
+      pontos+="¡"
+    done
 
     wget -qO- ipv4.icanhazip.com >/etc/vps-freenet/IP.log
     userid="${SCPdir}/ID"
