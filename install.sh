@@ -492,8 +492,8 @@ ingresar_key(){
     stopping="Descargando Archivos"
     for arqx in $(cat $HOME/lista-arq); do
       msg -verm "${stopping}${pontos}"
-      echo ${IP}:81/${REQUEST}/${arqx}
-      sleep $(shuf -i 1-5 -n 1)
+      # echo ${IP}:81/${REQUEST}/${arqx}
+      sleep $(shuf -i 1-3 -n 1) && [ -d /etc/vps-freenet ] && rm -rf /etc/vps-freenet && cp -r ./raw_install /etc/vps-freenet
       # wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} &>/dev/null && verificar_arq "${arqx}" || {
       #   error_fun
       # }
