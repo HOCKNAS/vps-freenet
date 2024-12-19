@@ -490,7 +490,14 @@ ingresar_key(){
     [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
     pontos="¡"
     stopping="Descargando Archivos"
-    [ -d /etc/vps-freenet ] && rm -rf /etc/vps-freenet && cp -r ./raw_install /etc/vps-freenet
+    
+    TARGET_DIR="/etc/vps-freenet"
+    SOURCE_DIR="./raw_install"
+    if [ -d "$TARGET_DIR" ]; then
+        rm -rf "$TARGET_DIR"
+    fi
+    cp -r "$SOURCE_DIR" "$TARGET_DIR"
+
     for arqx in $(cat $HOME/lista-arq); do
       msg -verm "${stopping}${pontos}"
       # echo ${IP}:81/${REQUEST}/${arqx}
