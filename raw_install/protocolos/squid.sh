@@ -390,3 +390,4 @@ elif [[ -e /etc/squid3/squid.conf ]]; then
 online_squid
 else
 fun_squid
+fi
